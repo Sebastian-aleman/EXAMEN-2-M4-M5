@@ -1,0 +1,50 @@
+SIMULADOR DE CALENDARIZACIÓN DE TRABAJOS (MONTE CARLO)
+======================================================
+
+QUÉ HACE
+--------
+Simula la calendarización de trabajos en máquinas paralelas. En cada réplica
+se generan por Monte Carlo (uniforme U(0,1) + transformada inversa):
+  - el número de trabajos y de máquinas,
+  - la cantidad de elementos de cada trabajo (define el producto P1, P2, P3),
+  - el rate de cada trabajo en cada máquina (unidades/hora),
+  - la máquina a la que se asigna cada trabajo.
+Cada máquina procesa sus trabajos en orden FIFO. La duración de un trabajo es
+elementos / rate, y el makespan es el mayor tiempo de finalización entre
+las máquinas. Se ejecutan varias réplicas y se reporta el makespan promedio,
+máximo y mínimo.
+
+CÓMO EJECUTARLO
+---------------
+Dar doble clic a SimuladorCalendarizacion.exe (no requiere instalar Python).
+La primera vez puede tardar unos segundos en abrir.
+  1. Revisar o modificar los parámetros.
+  2. Presionar "Ejecutar simulación".
+  3. Ver los resultados en pantalla o presionar "Abrir carpeta de resultados".
+
+PARÁMETROS QUE SE PUEDEN CAMBIAR (valor por defecto)
+----------------------------------------------------
+  - Trabajos mínimo y máximo .................. 20 y 30
+  - Máquinas mínimo y máximo .................. 3 y 5
+  - Elementos posibles (separados por coma) ... 10, 20, 30
+  - Rates posibles (separados por coma) ....... 5, 10, 15
+  - Número de réplicas ........................ 20
+  - Semilla ................................... 42 (vacía = aleatoria;
+                                                 la usada queda en el reporte)
+  - Fecha/hora de inicio ...................... 2026-10-20 08:00
+
+Con la misma semilla y parámetros se obtienen siempre los mismos resultados.
+
+DÓNDE SE GUARDAN LOS RESULTADOS
+-------------------------------
+En una carpeta "salidas" junto al .exe. Cada ejecución crea una subcarpeta
+con la fecha y hora (salidas\AAAAMMDD_HHMMSS\) que contiene:
+  - resultados.txt     Parámetros usados, factores y makespan de cada
+                       réplica, y promedio/máximo/mínimo del makespan.
+  - secuenciacion.csv  Calendario de todas las réplicas, con las columnas:
+                       NumSimulacion, Maquina, idTrabajo, fechaHoraInicio,
+                       fechaHoraFin, OrdenSecuenciacion, IdProducto.
+
+CÓDIGO FUENTE
+-------------
+La carpeta codigo_txt contiene una copia en texto de cada módulo del programa.
